@@ -16,9 +16,10 @@ const listStyle = css`
   align-items: center;
   border-bottom: 1px solid #222;
   padding: 5px 0;
+  cursor: pointer;
 `;
 
-const addTodoTextStyle = css`
+const todoTextStyle = css`
   margin-left: 5px;
 `;
 
@@ -34,6 +35,7 @@ const TodoListItem = (props: Props) => {
   const onClickDeleteHandle = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
+    event.stopPropagation();
     event.preventDefault();
     onClickDelete();
   };
@@ -49,7 +51,7 @@ const TodoListItem = (props: Props) => {
   return (
     <li onClick={onClickTodoHandle} className={listStyle}>
       <input type="checkbox" defaultChecked={isChecked} />
-      <p className={addTodoTextStyle}>{text}</p>
+      <p className={todoTextStyle}>{text}</p>
       <button onClick={onClickDeleteHandle} className={deleteButtonStyle}>
         delete
       </button>
