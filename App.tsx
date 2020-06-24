@@ -1,6 +1,7 @@
 import React from 'react';
 import Top from './components/pages/Top';
 import { StyleSheet, View } from 'react-native';
+import 'ress';
 
 export default function App() {
   return (
@@ -12,6 +13,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: '30px',
+    height: '100%',
   },
 });
