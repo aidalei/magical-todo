@@ -36,12 +36,13 @@ const AddTodoBar = (props: Props) => {
   ) => {
     event.preventDefault();
     onAddTodo(currentText);
+    updateText('');
   };
 
   return (
     <div className={addTodoBarStyle}>
       <input
-        defaultValue={currentText}
+        value={currentText}
         placeholder="TODO"
         onChange={onUpdateTextHandle}
         className={addInputStyle}

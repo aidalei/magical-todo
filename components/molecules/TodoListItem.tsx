@@ -50,7 +50,7 @@ const TodoListItem = (props: Props) => {
 
   return (
     <li onClick={onClickTodoHandle} className={listStyle}>
-      <input type="checkbox" defaultChecked={isChecked} />
+      <input type="checkbox" checked={isChecked} readOnly />
       <p className={todoTextStyle}>{text}</p>
       <button onClick={onClickDeleteHandle} className={deleteButtonStyle}>
         delete
