@@ -8,6 +8,10 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@emotion/native": "^11.0.0-next.13",
+    "@emotion/react": "^11.0.0-next.13",
+    "@emotion/styled": "^10.0.27",
     "emotion": "^10.0.27",
     "expo": "~37.0.3",
     "react": "~16.9.0",

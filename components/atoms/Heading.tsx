@@ -1,17 +1,20 @@
 import React from 'react';
-import { css } from "emotion";
+import { Text } from 'react-native';
+import styled from '@emotion/native';
 
 interface Props {
     children: string
 }
 
-const headingStyle = css`
+const HeadingStyle = styled.Text`
     color: hotpink;
+    font-size: 32px;
+    border-bottom: 2px solid hotpink;
 `
 
 const Heading = (props: Props) => {
     const {children} = props;
-return <h1 className={headingStyle}>{children}</h1>
+return <HeadingStyle>{children}</HeadingStyle>
 }
 
 export default Heading;

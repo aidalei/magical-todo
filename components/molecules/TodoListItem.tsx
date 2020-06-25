@@ -1,5 +1,7 @@
 import React from "react";
-import { css } from "emotion";
+import {CheckBox, View, TouchableOpacity, Button, Text, GestureResponderEvent } from "react-native";
+import styled from '@emotion/native'
+
 
 interface Props {
   text: string;
@@ -8,22 +10,30 @@ interface Props {
   onClickTodo: () => void;
 }
 
-const listStyle = css`
+const ListStyle = styled.TouchableOpacity`
   :not(:first-child) {
     margin-top: 10px;
   }
   display: flex;
+  flex-direction: row;
   align-items: center;
-  border-bottom: 1px solid #222;
-  padding: 5px 0;
+  border-bottom-color: #222;
+  border-bottom-width: 1px;
+  padding: 5px 2px;
   cursor: pointer;
 `;
 
-const todoTextStyle = css`
+const TodoTextStyle = styled.Text`
   margin-left: 5px;
+  color: hotpink;
+  font-weight: bold;
 `;
 
-const deleteButtonStyle = css`
+const DeleteButtonWrapper = styled.View`
+  margin-left: auto;
+`
+
+const DeleteButtonStyle = styled.Button`
   border: 1px solid #222;
   padding: 5px 10px;
   margin-left: auto;
@@ -33,7 +43,7 @@ const TodoListItem = (props: Props) => {
   const { text, isChecked, onClickDelete, onClickTodo } = props;
 
   const onClickDeleteHandle = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: GestureResponderEvent
   ) => {
     event.stopPropagation();
     event.preventDefault();
@@ -41,7 +51,7 @@ const TodoListItem = (props: Props) => {
   };
 
   const onClickTodoHandle = (
-    event: React.MouseEvent<HTMLLIElement, MouseEvent>
+    event: GestureResponderEvent
   ) => {
     event.stopPropagation();
     event.preventDefault();
@@ -49,13 +59,13 @@ const TodoListItem = (props: Props) => {
   };
 
   return (
-    <li onClick={onClickTodoHandle} className={listStyle}>
-      <input type="checkbox" checked={isChecked} readOnly />
-      <p className={todoTextStyle}>{text}</p>
-      <button onClick={onClickDeleteHandle} className={deleteButtonStyle}>
-        delete
-      </button>
-    </li>
+    <ListStyle onPress={onClickTodoHandle} >
+      <CheckBox value={isChecked} />
+      <TodoTextStyle>{text}</TodoTextStyle>
+      <DeleteButtonWrapper>
+      <DeleteButtonStyle onPress={onClickDeleteHandle} title="delete" />
+      </DeleteButtonWrapper>
+    </ListStyle>
   );
 };
 

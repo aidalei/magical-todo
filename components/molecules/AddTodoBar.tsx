@@ -1,21 +1,28 @@
 import React, { useState } from "react";
-import { css } from "emotion";
+import {TextInput, View, Button, NativeSyntheticEvent, NativeTouchEvent , Alert} from 'react-native'
+import styled from '@emotion/native'
 
-const addTodoBarStyle = css`
+const AddTodoBarStyle = styled.View`
   margin-top: auto;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
 `;
 
-const addInputStyle = css`
-  border: 1px solid #222;
+const AddInputStyle = styled.TextInput`
+  border: 2px solid hotpink;
+  outline: hotpink;
+  border-radius: 5px;
   width: 80%;
+  padding: 5px 10px;
+  background-color: white;
 `;
 
-const addButtonStyle = css`
+const AddButtonStyle = styled.Button`
   border: 1px solid #222;
   padding: 5px 10px;
   width: 18%;
+  border-radius: 5px;
 `;
 
 interface Props {
@@ -26,32 +33,28 @@ const AddTodoBar = (props: Props) => {
   const {  onAddTodo } = props;
   const [currentText, updateText] = useState('');
 
-  const onUpdateTextHandle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    updateText(event.target.value);
+  const onUpdateTextHandle = (text: string) => {
+    updateText(text);
   };
 
   const onAddTodoHandle = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: NativeSyntheticEvent<NativeTouchEvent>
   ) => {
     event.preventDefault();
+    if(!currentText) return
     onAddTodo(currentText);
     updateText('');
   };
 
   return (
-    <div className={addTodoBarStyle}>
-      <input
+    <AddTodoBarStyle>
+      <AddInputStyle
         value={currentText}
         placeholder="TODO"
-        onChange={onUpdateTextHandle}
-        className={addInputStyle}
-        type="text"
+        onChangeText={onUpdateTextHandle}
       />
-      <button onClick={onAddTodoHandle} className={addButtonStyle}>
-        add
-      </button>
-    </div>
+      <AddButtonStyle onPress={onAddTodoHandle} title="add" />
+    </AddTodoBarStyle>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { css } from "emotion";
+import { FlatList } from "react-native";
 import TodoListItem from "../molecules/TodoListItem";
 
 interface List {
@@ -15,24 +15,23 @@ interface Props {
   onClickDelete: (id: string) => () => void;
 }
 
-const listContainerStyle = css``;
-
 const TodoList = (props: Props) => {
   const { list, onClickDelete, onClickTodo } = props;
   return (
-    <ul className={listContainerStyle}>
-      {list.map(({ id, text, isChecked, isDeleted }) =>
-        !isDeleted ? (
-          <TodoListItem
-            key={id}
-            onClickDelete={onClickDelete(id)}
-            onClickTodo={onClickTodo(id)}
-            text={text}
-            isChecked={isChecked}
-          />
-        ) : null
-      )}
-    </ul>
+      <FlatList
+        data={list}
+        renderItem={({item}) =>
+          !item.isDeleted ? (
+            <TodoListItem
+              key={item.id}
+              onClickDelete={onClickDelete(item.id)}
+              onClickTodo={onClickTodo(item.id)}
+              text={item.text}
+              isChecked={item.isChecked}
+            />
+          ) : null
+        }
+      />
   );
 };
 
